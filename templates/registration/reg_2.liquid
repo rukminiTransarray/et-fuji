@@ -1,0 +1,297 @@
+{% comment %}<style>
+/**
+ * Registria
+ * Standard Registration Template
+ * Page 2
+ *
+ * Customize the settings below and include the
+ * appropriate fields on your page in admin.
+ *
+ * Platform Page Attributes
+ * - Title: "Upload Proof of Purchase | [BRAND]" or "Create an Account | [BRAND]"
+ * - URL: "reg_2"
+ * - Action: "Perform",
+ *           "EditRegistration"
+ * - Next Page: "reg_thanks"
+ * - Button Label: "Upload Proof of Purchase" or "Create Account"
+ * - Active: checked
+ * - SSL required: checked
+ */
+</style>{% endcomment %}
+
+{% assign brand_name = "Fujifilm" %}
+
+{% capture brand_logo %}
+    {{ "fuji_logo" | image_url }}
+{% endcapture %}
+
+{% capture brand_favicon %}
+    {{ "fuji_favicon" | image_url }}
+{% endcapture %}
+
+{% assign call_to_action = "<strong>Attention:</strong> The proof of purchase is used to verify your warranty start date.  We highly recommend uploading it before completing your registration." %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% if http_host contains "registriastaging" %}
+    <meta name="robots" content="noindex">
+    {% endif %}
+
+    {{ header }}
+
+    <title>{{ page.title }}</title>
+    <link rel="shortcut icon" href="{{ brand_favicon }}">
+
+</head>
+
+<style>
+
+.multi-select {
+    border: none;
+    max-height: 100%;
+}
+
+.multi-option:focus,
+.multi-option:hover,
+.multi-option.selected {
+    background-color: #fff;
+}
+
+.multi-option::before {
+    border-radius: 0;
+}
+
+.multi-option.selected::before {
+    background: none;
+    content: '✓';
+}
+
+</style>
+
+<body>
+
+<div class="wrapper">
+    <header class="header">
+
+        <img src="{{ brand_logo }}" alt="{{ brand_name }}" class="logo">
+        <h2>{{ call_to_action }}</h2>
+
+    </header>
+
+    {{ user.id | earliest_photoregister_activity | assign_to: 'photoregister_activity' }}
+
+    {% unless photoregister_activity.user == nil %}
+        {% assign user = photoregister_activity.user %}
+    {% endunless %}
+
+    {{ form_errors }}
+    {{ form_messages }}
+
+    <span id="registria_form_placeholder">
+        <div class="grid">
+            <div class="col-1">
+                <label for="proof_of_purchase" class="file-input">
+                    <span class="label-text">Proof of Purchase</span>
+                    <span class="file-label" data-button="Browse">Select an image...</span>
+                    <input type="file" class="registria_field" name="product[proof_of_purchase]" id="proof_of_purchase">
+                </label>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-1">
+                <p><strong>Attention:</strong> The proof of purchase is used to verify your warranty start date. We highly recommend uploading it before completing your registration.</p>
+                <p><a href="/warranty" target="_blank">Warranty Terms and Conditions</a></p>
+            </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label for="factors_influencing_purchase">
+              <span class="label-text large">What three (3) factors most influenced this purchase?</span>
+              <select class="registria_field" id="factors_influencing_purchase" multiple="multiple" data-max="3" name="product[factors_influencing_purchase][]">
+                <option value="Size">Size</option>
+                <option value="Ease of Operation">Ease of Operation</option>
+                <option value="Dealer Recommendation">Dealer Recommendation</option>
+                <option value="Fujifilm Reputation">Fujifilm Reputation</option>
+                <option value="Social Media Influence">Social Media Influence</option>
+                <option value="Magazine/Newspaper Article">Magazine/Newspaper Article</option>
+                <option value="Price/Value">Price/Value</option>
+                <option value="Previous Fujifilm Experience">Previous Fujifilm Experience</option>
+                <option value="Quality">Quality</option>
+                <option value="Friend/Relative Recommendation">Friend/Relative Recommendation</option>
+                <option value="Fujifilm Pro Rental Program">Fujifilm Pro Rental Program</option>
+                <option value="Fujifilm Education">Fujifilm Education</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="level_of_photography">
+              <span class="label-text large">Please indicate your level of photography:</span>
+              <select class="registria_field default" id="level_of_photography" name="user[level_of_photography]" title="">
+                <option value=""></option>
+                <option value="First Time User">First Time User</option>
+                <option value="Average Camera User">Average Camera User</option>
+                <option value="Advanced Amateur">Advanced Amateur</option>
+                <option value="Professional">Professional</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label for="genres">
+              <span class="label-text large">What genre(s) of photography interest you?</span>
+              <select class="registria_field" id="genres" multiple="multiple" name="user[genres][]">
+                <option value="Portrait/Wedding">Portrait/Wedding</option>
+                <option value="Outdoor/Nature">Outdoor/Nature</option>
+                <option value="Sports">Sports</option>
+                <option value="Food">Food</option>
+                <option value="Automotive">Automotive</option>
+                <option value="Animals">Animals</option>
+                <option value="Government/Military">Government/Military</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="share_photos">
+              <span class="label-text large">How do you share your photos?</span>
+              <select class="registria_field default" id="share_photos" name="user[share_photos]" title="">
+                <option value="" class="not_other"></option>
+                <option value="Social Media Sites" class="not_other">Social Media Sites</option>
+                <option value="Blog" class="not_other">Blog</option>
+                <option value="Email" class="not_other">Email</option>
+                <option value="Photo/Video Sharing Sites" class="not_other">Photo/Video Sharing Sites</option>
+                <option value="Print" class="not_other">Print</option>
+                <option value="Auction Websites" class="not_other">Auction Websites</option>
+                <option value="Other" class="other">Other</option>                
+            </select>
+            </label>
+          </div>
+        </div>
+        <div class="grid" id="share_photos_other">
+            <div class="col-1">
+            <label for="share_photos_other">
+                <input type="text" class="registria_field" name="user[share_photos_other]" placeholder="Please specify">
+            </label>
+            </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="age">
+              <span class="label-text large">Your age:</span>
+              <select class="registria_field default" id="age" name="user[age]" title="">
+                <option value=""></option>
+                <option value="13-18">13-18</option>
+                <option value="19-29">19-29</option>
+                <option value="30-39">30-39</option>
+                <option value="40-49">40-49</option>
+                <option value="50-59">50-59</option>
+                <option value="60-69">60-69</option>
+                <option value="70+">70+</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="gender">
+              <span class="label-text large">Your gender:</span>
+              <select class="registria_field default" id="gender" name="user[gender]" title="">
+                <option value=""></option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="recommend">
+              <span class="label-text large">How likely are you to recommend Fujifilm products to friends and family?</span>
+              <select class="registria_field default" id="recommend" name="user[recommend]" title="">
+                <option value=""></option>
+                <option value="Very Likely">Very Likely</option>
+                <option value="Somewhat Likely">Somewhat Likely</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Somewhat Unlikely">Somewhat Unlikely</option>
+                <option value="Very Unlikely">Very Unlikely</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-1">
+            <label class="label-text" for="warranty">
+              <span class="label-text large">Are you interested in purchasing an extended warranty?</span>
+              <select class="registria_field default" id="warranty" name="product[warranty]" title="">
+                <option value=""></option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {% comment %}
+        <div class="grid">
+            <div class="col-1">
+                <label>
+                    <span class="label-text">Username</span>
+                    <input class="registria_field" id="username" name="user[username]" type="email" value="{{ user.email }}">
+                </label>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-1-2">
+                <label for="new_password">
+                    <span class="label-text">Password</span>
+                    <input class="registria_field password_fields float-label-field" id="password" name="user[password]" type="password">
+                </label>
+            </div>
+            <div class="col-1-2">
+                <label for="password_confirmation">
+                    <span class="label-text">Confirm Password</span>
+                    <input class="password_fields registria_field float-label-field" id="password_confirmation" name="user[password_confirmation]" type="password">
+                </label>
+            </div>
+        </div>
+        {% endcomment %}
+
+        <input class="registria_field" id="page_name" name="page[name]" type="hidden" value="{{ page.name }}">
+        <input id="next_button" class="full-width" type="submit" value="{{ page.button_label }}">
+
+        <div class="or-bar"></div>
+
+        <a href="/{{ page.next_page.name }}" class="button-primary full-width">Skip This Step</a>
+    </span>
+
+</div>
+
+{{ 'share_photos' | snippet }}
+
+</body>
+</html>

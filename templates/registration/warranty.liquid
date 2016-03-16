@@ -1,0 +1,101 @@
+{% comment %}<style>
+/**
+ * Registria
+ * Standard Registration Template
+ * Page 1
+ *
+ * Customize the settings below and include the
+ * appropriate fields on your page in admin.
+ *
+ * Platform Page Attributes
+ * - Title: "Register Your Product | [BRAND]"
+ * - URL: "reg"
+ * - Action: "Perform",
+ *           "CompletePhotoRegistration" for Photoregister,
+ *           "SignupOrRegisterProduct" for no Photoregister
+ * - Next Page: "reg_2" or "reg_thanks"
+ * - Button Label: "Register"
+ * - Active: checked
+ * - SSL required: checked
+ */
+</style>{% endcomment %}
+
+{% assign brand_name = "Fuji" %}
+
+{% capture brand_favicon %}
+    {{ "fuji_favicon" | image_url }}
+{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% if http_host contains "registriastaging" %}
+    <meta name="robots" content="noindex">
+    {% endif %}
+
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js"></script>
+    {{ header }}
+
+    <title>{{ page.title }}</title>
+    <link rel="shortcut icon" href="{{ brand_favicon }}">
+</head>
+<body>
+    
+<div class="wrapper">
+
+        <div class="grid">
+            <div class="col-1"><a href="http://fuji.registriastaging.com/system/resources/2763/original/Fujifilm_1_year_warranty.pdf?1457460426">{{ "ICON_pdf" | image }}Download or open as PDF</a>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-1">
+
+                <h5 class="centered-text"><strong>FUJIFILM NORTH AMERICA CORPORATION LIMITED U.S. PRODUCT WARRANTY</strong></h5>
+
+                <h4 class="centered-text"><strong>LIMITED WARRANTY FOR FUJIFILM DIGITAL CAMERA, LENS, LITHIUM BATTERY, AC ADAPTER, AND BATTERY CHARGER PRODUCTS</strong></h4>
+
+                <h6 class="centered-text"><strong>THIS WARRANTY APPLIES TO ALL FUJIFILM-BRANDED DIGITAL CAMERA, LITHIUM BATTERY, LENS, AC ADAPTER AND/OR BATTERY CHARGER PRODUCTS (collectively and individually referred to herein as a “Product”) WHICH ARE PACKAGED TOGETHER, WHICH ARE MANUFACTURED BY FUJIFILM CORPORATION OR ITS SUPPLIERS, WHICH AT THE TIME OF MANUFACTURE WERE INTENDED BY FUJIFILM CORPORATION FOR RETAIL SALE OR DISTRIBUTION WITHIN THE MARKET OF THE UNITED STATES OF AMERICA AND ITS TERRITORIES (THE “U.S.”), AND WHICH ARE DISTRIBUTED THROUGH FUJIFILM NORTH AMERICA CORPORATION AND ITS AUTHORIZED DEALERS TO THE ORIGINAL END USER WITHIN THE U.S.</strong></h6>
+
+                <p>The Products contained in this package are warranted to the original end user purchaser by FUJIFILM North America Corporation (“Fujifilm”) only against defects in workmanship and materials for a period of (i) one (1) full year regarding digital camera and lens Products; and (ii) ninety (90) days regarding lithium battery, AC adapter and battery charger Products, from the date of purchase by the original end user, as documented by original computer generated or printed cash register receipt (“Warranty Period”) from an authorized FUJIFILM Products dealer (which authorized dealer does not include an authorized dealer’s third unauthorized party sub- dealers or sub-sellers) located within the U.S. This limited warranty does not apply to any Product purchased outside the U.S. at any time, or Products purchased from a dealer, sub- dealer, distributor, seller, sub-seller, or otherwise third party which has not been authorized by Fujifilm to sell the Products within the U.S. This limited warranty also does not apply to any used, second-hand, previously sold or owned, refurbished or reconditioned Products, such as, without limitation, Products purchased through websites offering pre-owned products and products which are being resold by individuals.</p>
+
+                <p>This limited warranty does not cover software, cables, straps, camera cases, memory cards, AA or AAA batteries, or any other third party manufactured or consumable items which may be contained in this package (“Accessories”). This limited warranty applies to the original end user only, is non-transferable, and is expressly conditioned on and subject to the conditions and limitations set forth herein.</p>
+
+                <p>Fujifilm will, at its option in any given instance, repair and/or replace (with a unit of like condition which may be refurbished), a defective Product that is returned, postage paid, within the Warranty Period to an authorized Fujifilm Repair Center. If replacement parts are used in making repairs, these parts may be re-manufactured or contain re-manufactured materials. This limited warranty is the sole remedy available and Fujifilm’s sole obligation should the Product be found to be defective within the Warranty Period. This limited warranty does not apply and may be voided if the Product has been damaged at any time by accident, mishandling, misuse, abuse (including without limitation, damage or defect due to exposure to abrasive particles, liquid, corrosion, or impact, subject to the particular Product model’s features and specifications), alteration, an electrical power problem, or if the Product has been used beyond or outside of specifications (such as and without limitation, temperature, humidity or moisture ranges or restrictions), used with incompatible accessories or a third party device, or if the damage or defect was due to a failure to follow operating or maintenance instructions or due to services performed by anyone other than an authorized Fujifilm Repair Center.</p>
+
+                <p>In returning the Product for repair, the Product must be delivered in either a cardboard shipping box or in another carton with bubble wrap or other appropriate packing material which offers a sufficient degree of protection from shipping damage. Do not include any other items or Accessories with the Product, AND REMOVE YOUR MEMORY CARD PRIOR TO SHIPMENT FOR REPAIR. It is advisable to return the Product using a courier service which provides a shipping tracking number. The Product must be accompanied by the original, computer generated or register printed and dated sales receipt. Handwritten sales receipts will not be accepted. Products returned without the required original sales receipt will not qualify for warranty service and Fujifilm’s standard service rates will apply to any repairs rendered. Note also that your Product registration date will not constitute the Product purchase date for Warranty Period purposes.</p>
+
+                <p>Fujifilm will not be responsible for any loss or damage incurred in transit or otherwise in connection with your return of the Product to Fujifilm, nor will Fujifilm be responsible for any items that you send in with the Product, including without limitation, any Memory Card (or images or videos on it) you leave in the camera when it is shipped. Without limitation, if you choose not to use a courier service which provides a shipping tracking number, you do so at your own risk.</p>
+
+                <p>SOME STATES DO NOT ALLOW CERTAIN CONDITIONS ON THE REPAIR OR REPLACEMENT OF WARRANTED PRODUCTS, SO THE ABOVE, OR PORTIONS OF IT, MAY NOT APPLY TO YOU.</p>
+
+                <p>THE FOREGOING LIMITED WARRANTY IS FUJIFILM’S ONLY WARRANTY WITH RESPECT TO THE PRODUCT AND FUJIFILM MAKES NO OTHER EXPRESS WARRANTY WITH RESPECT TO THE PRODUCT. NO IMPLIED WARRANTY, INCLUDING WITHOUT LIMITATION ANY WARRANTY OF MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE AND ANY WARRANTY ARISING OUT OF A COURSE OF DEALING OR USAGE OF TRADE APPLIES TO THE PRODUCT AFTER THE WARRANTY PERIOD. (SOME STATES DO NOT ALLOW LIMITATIONS ON HOW LONG AN IMPLIED WARRANTY LASTS, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU).</p>
+
+                <p>EXCEPT TO THE EXTENT A WRITTEN WARRANTY FROM FUJIFILM FOR ACCESSORIES IS SEPARATELY PROVIDED, FUJIFILM MAKES NO WARRANTY WHATSOEVER, WRITTEN OR ORAL, EXPRESS OR IMPLIED, WITH RESPECT TO ANY ACCESSORY, INCLUDING WITHOUT LIMITATION ANY WARRANTY OF MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT AND ANY WARRANTY ARISING OUT OF A COURSE OF DEALING OR USAGE OF TRADE. ALL ACCESSORIES ARE SOLD “AS IS.” SOME STATES PROHIBIT OR LIMIT THE DISCLAIMER OF IMPLIED WARRANTIES SO THIS PARAGRAPH MAY NOT APPLY TO YOU.</p>
+
+                <p>In no event will Fujifilm or its authorized dealers be liable for any special, consequential, indirect, exemplary, punitive or incidental damages (including without limitation, lost profits, lost opportunity, economic loss, overhead expenses, lost productivity, lost efficiencies or synergies, lost data, downtime, loss of use, cost of capital, damage to reputation or goodwill), even if such damages result from negligence or other fault and even if apprised of the likelihood of such damages.</p>
+
+                <p>SOME STATES DO NOT ALLOW THE FOREGOING EXCLUSIONS OR LIMITATIONS OF DAMAGES, SO SUCH LIMITATIONS OR EXCLUSIONS MAY NOT APPLY TO YOU. THIS LIMITED WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS, AND YOU MAY ALSO HAVE OTHER RIGHTS THAT VARY FROM STATE TO STATE.</p>
+
+                <p>This warranty shall be governed by and interpreted in accordance with the laws of the state of New York without regard to its conflicts of law provisions. If any court having jurisdiction finally holds that this limitation of remedies and liabilities is void or unenforceable, Fujifilm’s liability for any claim shall be limited to the purchase price of the Product giving rise to the claim, excluding any taxes, shipping or other costs.</p>
+
+                <p>For camera repair/service support, the address of an authorized Fujifilm Repair Center, or information regarding your Fujifilm limited warranty:</p>
+
+                <p class="contact-paragraph">Call: 1-800-659 FUJI (3854) OR Go to: <a href="http://www.fujifilmusa.com">http://www.fujifilmusa.com</a> AND
+                </p>
+                <ul>
+                    <li>Click the “Support &amp; Contact” tab &amp;</li>
+                    <li>Click the ”Digital Camera Limited Warranty Policies &bull; Accessory Support” link</li>
+                </ul>
+
+                <p class="right">REV.01.2014</p>
+
+            </div>
+        </div>
+</div>
+
+{{ "FUJI_retailers" | snippet }}
+</body>
+</html>

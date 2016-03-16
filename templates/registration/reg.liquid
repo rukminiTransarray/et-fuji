@@ -1,0 +1,242 @@
+{% comment %}<style>
+/**
+ * Registria
+ * Standard Registration Template
+ * Page 1
+ *
+ * Customize the settings below and include the
+ * appropriate fields on your page in admin.
+ *
+ * Platform Page Attributes
+ * - Title: "Register Your Product | [BRAND]"
+ * - URL: "reg"
+ * - Action: "Perform",
+ *           "CompletePhotoRegistration" for Photoregister,
+ *           "SignupOrRegisterProduct" for no Photoregister
+ * - Next Page: "reg_2" or "reg_thanks"
+ * - Button Label: "Register"
+ * - Active: checked
+ * - SSL required: checked
+ */
+</style>{% endcomment %}
+
+{% assign brand_name = "Fujifilm" %}
+
+{% capture brand_logo %}
+    {{ "fuji_logo" | image_url }}
+{% endcapture %}
+
+{% capture brand_favicon %}
+    {{ "fuji_favicon" | image_url }}
+{% endcapture %}
+
+{% assign call_to_action = "Register now for faster customer service, special offers, and more." %}
+
+{% assign source_id = "UYH01" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% if http_host contains "registriastaging" %}
+    <meta name="robots" content="noindex">
+    {% endif %}
+
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js"></script>
+    {{ header }}
+
+    <title>{{ page.title }}</title>
+    <link rel="shortcut icon" href="{{ brand_favicon }}">
+</head>
+<body>
+    
+<div class="wrapper">
+    <header class="header">
+
+        <img src="{{ brand_logo }}" alt="{{ brand_name }}" class="logo">
+        <h2>{{ call_to_action }}</h2>
+        
+    </header>
+
+    {{ user.id | earliest_photoregister_activity | assign_to: 'photoregister_activity' }}
+
+    {% unless photoregister_activity.user == nil %}
+        {% assign user = photoregister_activity.user %}
+    {% endunless %}
+
+    {{ form_errors }}
+    {{ form_messages }}
+
+    <h3 class="section-header">Your Product</h3>
+    {% if registration.product.sku %}
+        <h4>
+        {% unless user.first_name == nil or user.first_name == '' %}
+            Welcome back, {{ user.first_name }}.
+        {% endunless %}
+            Thanks for purchasing a {{ registration.product.name }}!
+        {% if registration.serial_number %}
+            Your product's serial number is {{ user.registrations.last.serial_number }}.
+        {% endif %}
+        </h4>
+        <input id="product" class="registria_field" type="hidden" name="product[product]" value="{{ registration.product.id }}">
+        <input type="hidden" name="product[model]" id="model" class="registria_field" value="{{ registration.product.sku }}">
+        <input type="hidden" name="product[serial_number]" id="serial" class="registria_field" value="{{ registration.serial_number }}">
+    {% else %}
+        {% unless user.first_name == nil or user.first_name == '' %}
+        <h4>Welcome back, {{ user.first_name }}.</h4>
+        {% endunless %}
+
+        <div class="grid">
+            <div class="col-1-2">
+                <label for="model">
+                    <span class="label-text">Model Number
+                {% capture label %}{{ model_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                    <input type="text" autocomplete="off" class="autocomplete-product registria_field" name="product[model]" id="model" value="{{ registration.product.sku }}">
+                    <input type="hidden" id="product" name="product[product]" class="registria_field" value="{{ registration.product.id }}">
+                </label>
+            </div>
+            <div class="col-1-2">
+                <label for="serial">
+                    <span class="label-text">Serial Number
+                {% capture label %}{{ serial_number_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                    <input class="registria_field" id="serial" name="product[serial_number]" type="text" value="{{ registration.serial_number }}">
+                </label>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if user.first_name == nil or user.first_name == '' %}
+    <h3 class="section-header">Your Information</h3>
+    <div class="grid">
+        <div class="col-1">
+            <label for="first_name">
+                <span class="label-text">Full Name
+                {% capture label %}{{ first_name_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input type="text" id="full_name" class="full-name"{% if label contains "*" %} required{% endif %}>
+            </label>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-1-2">
+            <label for="email">
+                <span class="label-text">Email Address
+                {% capture label %}{{ email_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field" id="email" name="user[email]" type="email" value="{% unless user.email contains 'no-email' %}{{ user.email }}{% endunless %}">
+            </label>
+        </div>
+        <div class="col-1-2">
+            <label for="phone">
+                <span class="label-text">Phone Number
+                {% capture label %}{{ phone_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field mask-phone" id="phone" name="user[phone]" type="tel" value="{{ user.phone }}">
+            </label>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-1-2">
+            <label for="address1">
+                <span class="label-text">Street Address
+                {% capture label %}{{ address1_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field" id="address1" name="user[address_attributes][address1]" type="text">
+            </label>
+        </div>
+        <div class="col-1-2">
+            <label for="address2">
+                <span class="label-text">Unit Number
+                {% capture label %}{{ address2_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field" id="address2" name="user[address_attributes][address2]" type="text">
+            </label>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-1-3 med-1">
+            <label for="zip">
+                <button type="button" class="button-round geo-trigger"></button>
+                <span class="label-text">ZIP Code
+                {% capture label %}{{ zip_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field reverse-zip" id="zip" name="user[address_attributes][zip]" type="tel">
+                <input class="registria_field" id="country" name="user[address_attributes][country]" type="hidden">
+            </label>
+        </div>
+        <div class="col-1-3 med-1">
+            <label for="city">
+                <span class="label-text">City
+                {% capture label %}{{ city_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field" id="city" name="user[address_attributes][city]" type="text">
+            </label>
+        </div>
+        <div class="col-1-3 med-1">
+            <label for="state">
+                <span class="label-text">State
+                {% capture label %}{{ state_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input class="registria_field autocomplete-state" id="state" name="user[address_attributes][state]" autocomplete="off" type="text">
+            </label>
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" class="registria_field" id="first_name" name="user[first_name]" value="{{ user.first_name }}">
+    <input type="hidden" class="registria_field" id="last_name" name="user[last_name]" value="{{ user.last_name }}">
+    <input class="registria_field" id="email" name="user[email]" type="hidden" value="{{ user.email }}">
+    <input class="registria_field" id="phone" name="user[phone]" type="hidden" value="{{ user.phone }}">
+    <input class="registria_field" id="address1" name="user[address_attributes][address1]" type="hidden" value="{{ user.address.address1 }}">
+    <input class="registria_field" id="address2" name="user[address_attributes][address2]" type="hidden" value="{{ user.address.address2 }}">
+    <input class="registria_field" id="city" name="user[address_attributes][city]" type="hidden" value="{{ user.address.city }}">
+    <input class="registria_field" id="state" name="user[address_attributes][state]" type="hidden" value="{{ user.address.state }}">
+    <input class="registria_field" id="international_state" name="user[address_attributes][international_state]" type="hidden" value="{{ user.address.international_state }}">
+    <input class="registria_field" id="zip" name="user[address_attributes][zip]" type="hidden" value="{{ user.address.zip }}">
+    <input class="registria_field" id="country" name="user[address_attributes][country]" type="hidden" value="{{ user.address.country }}">
+    {% endif %}
+
+    <h3 class="section-header">Purchase Information</h3>
+    <div class="grid">
+        <div class="col-1-2">
+            <label for="purchased_at">
+                <span class="label-text">Purchased From
+                {% capture label %}{{ purchased_at_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input type="text" class="registria_field" name="product[purchased_at]" id="purchased_at" autocomplete="off">
+            </label>
+        </div>
+        <div class="col-1-2">
+            <label for="purchase_date">
+                <span class="label-text">Purchase Date
+                {% capture label %}{{ purchase_date_label }}{% endcapture %}
+                {% if label contains "*" %}*{% endif %}</span>
+                <input type="tel" class="registria_field mask-date" name="product[purchase_date]" id="purchase_date">
+            </label>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-1">
+            <label for="receive_product_communication">
+                <input type="checkbox" class="registria_field" name="user[receive_product_communication]" id="receive_product_communication" value="1" checked="checked">
+                <span class="label-text">Yes, I would like to receive {{ brand_name }} communications.</span>
+            </label>
+        </div>
+    </div>
+
+    <input type="hidden" class="registria_field" id="input_version" name="product[input_version]" value="{{ source_id }}">
+    {% unless registration %}
+    {% if photoregister_activity %}
+        <input class="registria_field" id="registration_source" name="product[source]" type="hidden" value="photoregister">
+    {% endif %}
+    {% endunless %}
+
+    {{ next_button }}
+
+</div>
+
+{{ "FUJI_retailers" | snippet }}
+</body>
+</html>

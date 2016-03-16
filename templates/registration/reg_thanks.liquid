@@ -1,0 +1,63 @@
+{% comment %}<style>
+/**
+ * Registria
+ * Standard Registration Template
+ * Default Confirmation Page
+ *
+ * Customize the settings below and include the
+ * appropriate fields on your page in admin.
+ *
+ * Platform Page Attributes
+ * - Title: "Thanks for Registering | [BRAND]"
+ * - URL: "reg_thanks"
+ * - Action: "Perform",
+ *           "Custom"
+ * - Next Page: "None"
+ * - Active: checked
+ */
+</style>{% endcomment %}
+
+{% assign brand_name = "Fujifilm" %}
+
+{% capture brand_logo %}
+    {{ "fuji_logo" | image_url }}
+{% endcapture %}
+
+{% capture brand_favicon %}
+    {{ "fuji_favicon" | image_url }}
+{% endcapture %}
+
+{% assign brand_url = "http://www.fujifilmusa.com" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% if http_host contains "registriastaging" %}
+    <meta name="robots" content="noindex">
+    {% endif %}
+
+    {{ header }}
+
+    <title>{{ page.title }}</title>
+    <link rel="shortcut icon" href="{{ brand_favicon }}">
+</head>
+<body>
+    
+<div class="wrapper">
+    <header class="header">
+
+        <img src="{{ brand_logo }}" alt="{{ brand_name }}" class="logo">
+        
+    </header>
+
+    <h2>Registration Successful</h2>
+
+    <p>Congratulations! You have successfully registered your {{ user.registrations.last.product.name }}.</p>
+    
+    <p><a href="/reg?t={{ user.single_access_token }}" class="button-primary">Register another product</a> <a href="{{ brand_url }}" class="button-primary">Return to {{ brand_name }} site</a></p>
+</div>
+
+</body>
+</html>
