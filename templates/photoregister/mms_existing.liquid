@@ -1,0 +1,15 @@
+{% comment %}
+Platform MMS Template Attributes:
+- Name: "[YOUR_BRAND] Photoregister Existing Registration"
+- From Number: "+18654072219" on staging and "71403" on production
+- Event: "None"
+{% endcomment %}
+
+{% assign brand_name = "YOUR BRAND HERE" %}
+{% assign code = photoregister_activity.photoregister_code %}
+{% assign product = code.product %}
+{% assign model_name = product.name %}
+{% assign model_sku = product.sku %}
+{% assign serial_number = code.serial_number %}
+
+{{ brand_name }} Photoregister: Thank you! It appears you have already registered this product. Your product: {% unless model_name == model_sku %}{{ model_name }}{% endunless %} {{ model_sku }} Serial number: {{ serial_number }} For help text HELP. To cancel, text STOP.

@@ -102,7 +102,7 @@
                     <span class="label-text">Serial Number
                 {% capture label %}{{ serial_number_label }}{% endcapture %}
                 {% if label contains "*" %}*{% endif %}</span>
-                    <input class="registria_field" id="serial" name="product[serial_number]" type="text" value="{{ registration.serial_number }}">
+                    <input class="registria_field" id="serial" name="product[serial_number]" type="text" value="{{ registration.serial_number }}" maxlength="12">
                 </label>
             </div>
         </div>
@@ -205,7 +205,7 @@
                 <span class="label-text">Purchased From
                 {% capture label %}{{ purchased_at_label }}{% endcapture %}
                 {% if label contains "*" %}*{% endif %}</span>
-                <input type="text" class="registria_field" name="product[purchased_at]" id="purchased_at" autocomplete="off">
+                <input type="text" class="registria_field" name="product[purchased_at]" id="purchased_at" autocomplete="off" data-allowfreeinput="true">
             </label>
         </div>
         <div class="col-1-2">
@@ -228,7 +228,7 @@
 
     <input type="hidden" class="registria_field" id="input_version" name="product[input_version]" value="{{ source_id }}">
     {% unless registration %}
-    {% if photoregister_activity %}
+    {% if utm_source == "photoregister" %}
         <input class="registria_field" id="registration_source" name="product[source]" type="hidden" value="photoregister">
     {% endif %}
     {% endunless %}

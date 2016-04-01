@@ -46,38 +46,12 @@
     <link rel="shortcut icon" href="{{ brand_favicon }}">
 
 </head>
-
-<style>
-
-.multi-select {
-    border: none;
-    max-height: 100%;
-}
-
-.multi-option:focus,
-.multi-option:hover,
-.multi-option.selected {
-    background-color: #fff;
-}
-
-.multi-option::before {
-    border-radius: 0;
-}
-
-.multi-option.selected::before {
-    background: none;
-    content: '✓';
-}
-
-</style>
-
 <body>
 
 <div class="wrapper">
     <header class="header">
 
         <img src="{{ brand_logo }}" alt="{{ brand_name }}" class="logo">
-        <h2>{{ call_to_action }}</h2>
 
     </header>
 
@@ -91,10 +65,11 @@
     {{ form_messages }}
 
     <span id="registria_form_placeholder">
+        <h3 class="section-header">Proof of Purchase <span class="red">(Recommended)</span></h3>
         <div class="grid">
             <div class="col-1">
                 <label for="proof_of_purchase" class="file-input">
-                    <span class="label-text">Proof of Purchase</span>
+                    <span class="label-text"><!-- Proof of Purchase --></span>
                     <span class="file-label" data-button="Browse">Select an image...</span>
                     <input type="file" class="registria_field" name="product[proof_of_purchase]" id="proof_of_purchase">
                 </label>
@@ -102,11 +77,11 @@
         </div>
         <div class="grid">
             <div class="col-1">
-                <p><strong>Attention:</strong> The proof of purchase is used to verify your warranty start date. We highly recommend uploading it before completing your registration.</p>
+                <p class="attention"><strong>Attention:</strong> The proof of purchase is used to verify your warranty start date. We highly recommend uploading it before completing your registration.</p>
                 <p><a href="/warranty" target="_blank">Warranty Terms and Conditions</a></p>
             </div>
         </div>
-
+        <h3 class="section-header">Questions (Optional)</h3>
         <div class="grid">
           <div class="col-1">
             <label for="factors_influencing_purchase">
@@ -284,9 +259,6 @@
         <input class="registria_field" id="page_name" name="page[name]" type="hidden" value="{{ page.name }}">
         <input id="next_button" class="full-width" type="submit" value="{{ page.button_label }}">
 
-        <div class="or-bar"></div>
-
-        <a href="/{{ page.next_page.name }}" class="button-primary full-width">Skip This Step</a>
     </span>
 
 </div>
